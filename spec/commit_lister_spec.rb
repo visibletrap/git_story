@@ -1,5 +1,4 @@
 require '../lib/commit_lister'
-require '../lib/state_mapper'
 
 describe CommitLister do
 

@@ -1,3 +1,5 @@
+require_relative 'renderer'
+
 class StateMapper
 
   def execute(commit_story)
@@ -33,7 +35,7 @@ class StateMapper
 
     {}.tap do |h|
       doc.xpath('//stories/story').map do |e|
-        h[e.xpath('id').text] = e.xpath('current_state').text
+        h[e.xpath('id').text] = e.xpath('current_state').text.to_sym
       end
     end
   end

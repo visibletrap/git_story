@@ -1,5 +1,4 @@
 require '../lib/state_mapper'
-require '../lib/renderer'
 
 describe StateMapper do
 

@@ -1,3 +1,5 @@
+require_relative 'state_mapper'
+
 class CommitLister
 
   def execute(since, until_commit)
