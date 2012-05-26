@@ -1,7 +1,7 @@
 class StateMapper
 
   def execute(commit_story)
-
+    Renderer.new.render(map(commit_story))
   end
 
   def map(commit_story)

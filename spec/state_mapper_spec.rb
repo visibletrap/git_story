@@ -1,11 +1,20 @@
 require '../lib/state_mapper'
+require '../lib/renderer'
 
 describe StateMapper do
 
   it { should respond_to :fetch }
 
   describe "#execute" do
-    it "maps commit_story to commit_story_status"
+    it "calls #map and passes result to Renderer" do
+      commit_story = mock('commit_story')
+      commit_story_status = mock('commit_story_status')
+
+      subject.should_receive(:map).with(commit_story).and_return(commit_story_status)
+      Renderer.any_instance.should_receive(:render).with(commit_story_status)
+
+      subject.execute(commit_story)
+    end
   end
 
   describe '#map' do
