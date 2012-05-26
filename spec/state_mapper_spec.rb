@@ -17,18 +17,18 @@ describe StateMapper do
   end
 
   describe '#map' do
-    it "maps { commit => story_id } to { commit => { story => story_id, state => state_symbol } }" do
+    it "maps { story_id => commit } to { commit => { story => story_id, state => state_symbol } }" do
       subject.should_receive(:fetch).with(['123', '234']).and_return({ '123' => :accepted, '234' => :rejected })
-      subject.map({ 'x' => '123', 'y' => '234' }).should ==
+      subject.map({ '123' => 'x', '234' => 'y' }).should ==
           {
               'x' => { 'story' => '123', 'state' => :accepted },
               'y' => { 'story' => '234', 'state' => :rejected }
           }
     end
 
-    it "ignores commit that correspond story is not returned from fetch" do
+    it "ignores commit that corresponding story is not returned from #fetch" do
       subject.should_receive(:fetch).with(['123', '234']).and_return({ '234' => :rejected })
-      subject.map({ 'x' => '123', 'y' => '234' }).should ==
+      subject.map({ '123' => 'x', '234' => 'y' }).should ==
           { 'y' => {'story' => '234', 'state' => :rejected } }
     end
   end

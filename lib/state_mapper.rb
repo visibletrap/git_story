@@ -6,15 +6,10 @@ class StateMapper
     Renderer.new.render(map(commit_story))
   end
 
-  def map(commit_story)
-    story_state = fetch(commit_story.values)
-    commit_story.tap do |cs|
-      cs.each do |commit, story|
-        if story_state[story]
-          cs[commit] = {'story' => story, 'state' => story_state[story]}
-        else
-          cs.delete(commit)
-        end
+  def map(story_commit)
+    {}.tap do |h|
+      fetch(story_commit.keys).each do |story, state|
+        h[story_commit[story]] = {'story' => story, 'state' => state}
       end
     end
   end

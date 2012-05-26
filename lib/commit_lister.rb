@@ -7,12 +7,20 @@ class CommitLister
   end
 
   def list(since, until_commit)
-    commits = git_list_commit(since, until_commit).split("\n")
-    commits_with_story = commits.reject { |c| /\[#(\d*)\]/.match(c).nil? }
-    commit_story = commits_with_story.reverse.map do |c|
-      [/^\w*/.match(c)[0], /\[#(\d*)\]/.match(c)[1]]
+    commit_lines = git_list_commit(since, until_commit).split("\n")
+    commits_with_story = commit_lines.reject { |cl| match_story(cl).nil? }
+    story_commit = commits_with_story.reverse.map do |cl|
+      [match_story(cl)[1], match_commit(cl)[0]]
     end
-    Hash[commit_story]
+    Hash[story_commit]
+  end
+
+  def match_story(commit_line)
+    /\[#(\d*)\]/.match(commit_line)
+  end
+
+  def match_commit(commit_line)
+    /^\w*/.match(commit_line)
   end
 
   def git_list_commit(since, until_commit)
