@@ -26,6 +26,12 @@ describe StateMapper do
               'y' => { 'story' => '234', 'state' => :rejected }
           }
     end
+
+    it "ignores commit that correspond story is not returned from fetch" do
+      subject.should_receive(:fetch).with(['123', '234']).and_return({ '234' => :rejected })
+      subject.map({ 'x' => '123', 'y' => '234' }).should ==
+          { 'y' => {'story' => '234', 'state' => :rejected } }
+    end
   end
 
 end
