@@ -1,4 +1,9 @@
 class CommitLister
+
+  def execute(since, until_commit)
+    StateMapper.new.execute(list(since, until_commit))
+  end
+
   def list(since, until_commit)
     commits = git_list_commit(since, until_commit).split("\n")
     commits_with_story = commits.reject { |c| /\[#(\d*)\]/.match(c).nil? }

@@ -1,8 +1,22 @@
 require '../lib/commit_lister'
+require '../lib/state_mapper'
 
 describe CommitLister do
 
   it { should respond_to(:git_list_commit) }
+
+  describe "#execute" do
+    it "lists commit-story and pass to StateMapper" do
+      since = "941a3e6b34"
+      until_commit = "13351e6"
+      commit_story = mock('commit_story_hash')
+      subject.stub(:list).with(since, until_commit).and_return(commit_story)
+
+      StateMapper.any_instance.should_receive(:execute).with(commit_story)
+
+      subject.execute(since, until_commit)
+    end
+  end
 
   describe "#list" do
     it "lists commits from after since_commit to until_commit as a hash { commit => story }" do
