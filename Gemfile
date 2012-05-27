@@ -1,2 +1,4 @@
-source "http://rubygems.org"
-gem 'rspec'
+source 'https://rubygems.org'
+
+# Specify your gem's dependencies in git_story.gemspec
+gemspec

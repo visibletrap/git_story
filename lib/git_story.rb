@@ -1,9 +1,11 @@
+require "git_story/version"
+
 require_relative 'manual_git_commit_lister'
 require_relative 'split_and_match_processor'
 require_relative 'tracker_fetched_mapper'
 require_relative 'puts_renderer'
 
-class GitStory
+module GitStory
 
   def state(since, until_commit)
     commit_state_factory.list(since, until_commit)
@@ -15,4 +17,5 @@ class GitStory
     commit_processor = SplitAndMatchProcessor.new(state_mapper)
     ManualGitCommitLister.new(commit_processor)
   end
+
 end

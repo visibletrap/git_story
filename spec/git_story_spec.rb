@@ -2,6 +2,8 @@ require_relative '../lib/git_story'
 
 describe GitStory do
 
+  subject { Object.new.extend(GitStory) }
+
   let(:since) { "941a3e6b34" }
   let(:until_commit) { "13351e6" }
 
