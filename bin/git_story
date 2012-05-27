@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
 require 'git_story'
+
+Object.new.extend(GitStory).state(ARGV[0], ARGV[1])
