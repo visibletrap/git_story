@@ -2,8 +2,7 @@
 
 TODO: Write a gem description
 
-[![Build
-Status](https://secure.travis-ci.org/visibletrap/git_story.png)](http://travis-ci.org/visibletrap/git_story])
+[![Build Status](https://secure.travis-ci.org/visibletrap/git_story.png)](http://travis-ci.org/visibletrap/git_story)
 
 ## Installation
 
