@@ -2,12 +2,17 @@ require_relative 'state_mapper'
 
 class CommitLister
 
-  def execute(since, until_commit)
-    StateMapper.new.execute(list(since, until_commit))
+  def initialize(since = nil, until_commit = nil)
+    @since = since
+    @until = until_commit
   end
 
-  def list(since, until_commit)
-    commit_lines = git_list_commit(since, until_commit).split("\n")
+  def execute
+    StateMapper.new.execute(list(@since, @until))
+  end
+
+  def list
+    commit_lines = git_list_commit(@since, @until).split("\n")
     commits_with_story = commit_lines.reject { |cl| match_story(cl).nil? }
     story_commit = commits_with_story.reverse.map do |cl|
       [match_story(cl)[1], match_commit(cl)[0]]
@@ -23,7 +28,7 @@ class CommitLister
     /^\w*/.match(commit_line)
   end
 
-  def git_list_commit(since, until_commit)
-    `git log --pretty=oneline #{since}..#{until_commit}`
+  def git_list_commit
+    `git log --pretty=oneline #{@since}..#{@until}`
   end
 end
