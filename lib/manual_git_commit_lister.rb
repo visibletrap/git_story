@@ -1,4 +1,4 @@
-class CommitLister
+class ManualGitCommitLister
 
   def initialize(commit_processor)
     @commit_processor = commit_processor

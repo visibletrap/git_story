@@ -1,13 +1,13 @@
-require '../lib/split_and_match_commit_processor'
+require_relative '../lib/split_and_match_processor'
 
-describe SplitAndMatchCommitProcessor do
+describe SplitAndMatchProcessor do
 
   let(:state_mapper) { mock('state_mapper') }
 
-  subject { SplitAndMatchCommitProcessor.new(state_mapper) }
+  subject { SplitAndMatchProcessor.new(state_mapper) }
 
   describe "#execute" do
-    it "process raw commit and pass to StateMapper" do
+    it "process raw commit and pass to state mapper" do
       raw_commit = 'raw_commit'
       story_commit = mock('story_commit_hash')
       subject.stub(:process).with(raw_commit).and_return(story_commit)
@@ -19,7 +19,7 @@ describe SplitAndMatchCommitProcessor do
   end
 
   describe "#process" do
-    it "processes raw_commit string to a hash { story => commit }" do
+    it "processes raw commit string to a hash { story => commit }" do
       raw_commit = <<raw_git_commit
 13351e6dfc28e05cc4c13ea039654b95c62185a0 [#29977409] Filtered by platform
 70c9112ddf9f02e6680797f490e418d95a3836ed [#29977427] filter series by genre and country_o

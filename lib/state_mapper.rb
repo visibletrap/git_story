@@ -1,5 +1,3 @@
-require_relative 'puts_renderer'
-
 class StateMapper
 
   def initialize(renderer)

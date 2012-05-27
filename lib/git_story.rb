@@ -1,4 +1,7 @@
 require_relative 'commit_lister'
+require_relative 'split_and_match_processor'
+require_relative 'state_mapper'
+require_relative 'puts_renderer'
 
 class GitStory
 
@@ -9,7 +12,7 @@ class GitStory
   def commit_state_factory
     renderer = PutsRenderer.new
     state_mapper = StateMapper.new(renderer)
-    commit_processor = SplitAndMatchCommitProcessor.new(state_mapper)
-    CommitLister.new(commit_processor)
+    commit_processor = SplitAndMatchProcessor.new(state_mapper)
+    ManualGitCommitLister.new(commit_processor)
   end
 end

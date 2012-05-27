@@ -1,4 +1,4 @@
-require '../lib/state_mapper'
+require_relative '../lib/state_mapper'
 
 describe StateMapper do
 

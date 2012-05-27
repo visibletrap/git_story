@@ -16,7 +16,7 @@ describe GitStory do
 #{commits[1]} [##{stories[1]}] Episode index and Episode show page
 #{commits[0]} [##{stories[0]}] Hardcode country filters for music landing page
 raw_git_commit
-    CommitLister.any_instance.stub(:git_list_commit).and_return(raw_commit)
+    ManualGitCommitLister.any_instance.stub(:git_list_commit).and_return(raw_commit)
   end
 
   def stub_network
