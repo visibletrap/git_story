@@ -1,6 +1,10 @@
-require '../lib/commit_processor'
+require '../lib/split_and_match_commit_processor'
 
-describe CommitProcessor do
+describe SplitAndMatchCommitProcessor do
+
+  let(:state_mapper) { mock('state_mapper') }
+
+  subject { SplitAndMatchCommitProcessor.new(state_mapper) }
 
   describe "#execute" do
     it "process raw commit and pass to StateMapper" do
@@ -8,7 +12,7 @@ describe CommitProcessor do
       story_commit = mock('story_commit_hash')
       subject.stub(:process).with(raw_commit).and_return(story_commit)
 
-      StateMapper.any_instance.should_receive(:execute).with(story_commit)
+      state_mapper.should_receive(:execute).with(story_commit)
 
       subject.execute(raw_commit)
     end

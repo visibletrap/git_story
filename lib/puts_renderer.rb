@@ -1,4 +1,4 @@
-class Renderer
+class PutsRenderer
   def render(commit_story_state)
     commit_story_state.each do |commit, story_state|
       unless story_state['state'] == :accepted

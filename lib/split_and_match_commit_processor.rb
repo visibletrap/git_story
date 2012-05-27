@@ -1,9 +1,13 @@
 require_relative 'state_mapper'
 
-class CommitProcessor
+class SplitAndMatchCommitProcessor
+
+  def initialize(state_mapper)
+    @state_mapper = state_mapper
+  end
 
   def execute(raw_commit)
-    StateMapper.new.execute(process(raw_commit))
+    @state_mapper.execute(process(raw_commit))
   end
 
   def process(raw_commit)

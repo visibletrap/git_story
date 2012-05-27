@@ -31,7 +31,7 @@ raw_git_commit
         h[css[0]] = {'story' => css[1], 'state' => css[2]}
       end
     end
-    Renderer.any_instance.should_receive(:render).with(render_input)
+    PutsRenderer.any_instance.should_receive(:render).with(render_input)
     subject.state(since, until_commit)
   end
 

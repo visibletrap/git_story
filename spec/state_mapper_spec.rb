@@ -2,6 +2,10 @@ require '../lib/state_mapper'
 
 describe StateMapper do
 
+  let(:renderer) { mock('renderer') }
+
+  subject { StateMapper.new(renderer) }
+
   it { should respond_to :fetch }
 
   describe "#execute" do
@@ -10,7 +14,7 @@ describe StateMapper do
       commit_story_status = mock('commit_story_status')
 
       subject.should_receive(:map).with(commit_story).and_return(commit_story_status)
-      Renderer.any_instance.should_receive(:render).with(commit_story_status)
+      renderer.should_receive(:render).with(commit_story_status)
 
       subject.execute(commit_story)
     end
