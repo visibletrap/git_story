@@ -4,9 +4,12 @@ require File.expand_path('../lib/git_story/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Nuttanart Pornprasitsakul"]
   gem.email         = ["visibletrap@gmail.com"]
-  #gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{shows status of PivotalTracker's story that git commits belong to}
-  gem.homepage      = ""
+  gem.description   = %q{
+    This gem help you check which commits in your git repository belonges to unaccepted PivotalTracker's story
+    so that you can make a decision whether you should deploy those commits or not.
+  }
+  gem.summary       = %q{shows unaccepted status of PivotalTracker's story that git commits belong to}
+  gem.homepage      = "http://github.com/visibletrap/git_story"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
