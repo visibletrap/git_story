@@ -12,7 +12,7 @@ describe CommitLister do
   describe "#execute" do
     it "lists commit-story and pass to StateMapper" do
       story_commit = mock('commit_story_hash')
-      subject.stub(:list).with(since, until_commit).and_return(story_commit)
+      subject.stub(:list).and_return(story_commit)
 
       StateMapper.any_instance.should_receive(:execute).with(story_commit)
 

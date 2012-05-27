@@ -2,8 +2,8 @@ require_relative 'renderer'
 
 class StateMapper
 
-  def execute(commit_story)
-    Renderer.new.render(map(commit_story))
+  def execute(story_commit)
+    Renderer.new.render(map(story_commit))
   end
 
   def map(story_commit)
