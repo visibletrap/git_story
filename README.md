@@ -2,6 +2,9 @@
 
 TODO: Write a gem description
 
+[![Build
+Status](https://secure.travis-ci.org/visibletrap/git_story.png)](http://travis-ci.org/visibletrap/git_story])
+
 ## Installation
 
 Add this line to your application's Gemfile:
