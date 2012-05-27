@@ -1,4 +1,4 @@
-class StateMapper
+class TrackerFetchedMapper
 
   def initialize(renderer)
     @renderer = renderer

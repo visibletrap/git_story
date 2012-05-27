@@ -20,7 +20,7 @@ raw_git_commit
   end
 
   def stub_network
-    StateMapper.any_instance.stub(:fetch).with(stories).and_return(Hash[stories.zip(states)])
+    TrackerFetchedMapper.any_instance.stub(:fetch).with(stories).and_return(Hash[stories.zip(states)])
   end
 
   it "run through CommitLister to Renderer" do

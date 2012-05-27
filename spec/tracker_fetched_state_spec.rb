@@ -1,10 +1,10 @@
-require_relative '../lib/state_mapper'
+require_relative '../lib/tracker_fetched_mapper'
 
-describe StateMapper do
+describe TrackerFetchedMapper do
 
   let(:renderer) { mock('renderer') }
 
-  subject { StateMapper.new(renderer) }
+  subject { TrackerFetchedMapper.new(renderer) }
 
   it { should respond_to :fetch }
 
