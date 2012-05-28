@@ -11,6 +11,11 @@ describe GitStory do
   let(:stories) { %w(29981485 29521391 29977427 29977409) }
   let(:states) { %w(accepted rejected finished started).each(&:to_sym) }
 
+  def set_up_parameters
+    ENV['TRACKER_PROJECT_ID'] = 'fake project id'
+    ENV['TRACKER_TOKEN'] = 'fake tracker token'
+  end
+
   def stub_git
     raw_commit = <<raw_git_commit
 #{commits[3]} [##{stories[3]}] Filtered by platform
@@ -26,6 +31,7 @@ raw_git_commit
   end
 
   it "run through CommitLister to Renderer" do
+    set_up_parameters
     stub_git
     stub_network
     render_input = {}.tap do |h|
