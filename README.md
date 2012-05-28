@@ -20,10 +20,14 @@ Or install it yourself as:
     
 Then you need to set PivotalTraker's project id and api token to you enviraonment variables:
 
-	export TRACKER_PROJECT_ID=your_pivotal_tracker_project_id # You can set multiple projects in a comma-separated format
+	export TRACKER_PROJECT_ID=your_pivotal_tracker_project_id
 	export TRACKER_TOKEN=your_pivotal_tracker_api_token
 	
-Or setting permanently by append them to your .profile or .bashrc or .bash_profile.
+In the case of shared repository across multiple Tracker projects, you can put project ids with comma-separated format.
+	
+	export TRACKER_PROJECT_ID=1,2,3,...
+		
+Setting permanently by append them to your .profile or .bashrc or .bash_profile.
 
 ## Requirements
 
@@ -51,5 +55,9 @@ or
 	
 ## Notice
 
- - Current implementation is ignoring **unknown stories** and **non-story id commit**.
+ - Current implementation is ignoring **unknown stories** and **non-story_id prefixed commit**.
  - If many commits are belonging to a story, only one commit will be displayed.
+
+## Contributors
+
+ - [acroca](https://github.com/acroca)
