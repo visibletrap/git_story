@@ -18,12 +18,19 @@ Or install it yourself as:
 
     $ gem install git_story
     
-Then you need to set PivotalTraker's project id and api token to you enviraonment variables:
+Then you need to set PivotalTraker's api token to you enviraonment variables:
 
-	export TRACKER_PROJECT_ID=your_pivotal_tracker_project_id # You can set multiple projects in a comma-separated format
 	export TRACKER_TOKEN=your_pivotal_tracker_api_token
 	
-Or set them permanently by append them to .profile or .bashrc or .bash_profile.
+Or set it permanently by append them to .profile or .bashrc or .bash_profile.
+
+## Specific projects
+
+By default git-story will check all your projects in PivotalTracker, but you can also set a specific list of projects. To do so, just add another environment variable like following:
+
+	export TRACKER_PROJECT_ID=your_pivotal_tracker_project_id
+
+If you need to set multiple projects, add them using comma separated format.
 
 ## Requirements
 

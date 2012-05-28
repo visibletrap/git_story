@@ -25,7 +25,23 @@ class TrackerFetchedMapper
 
     hydra = Typhoeus::Hydra.new
 
-    projects = ENV['TRACKER_PROJECT_ID'].split(",")
+    if ENV['TRACKER_PROJECT_ID']
+      projects = ENV['TRACKER_PROJECT_ID'].split(",")
+    else
+      request = Typhoeus::Request.new(
+        "http://www.pivotaltracker.com/services/v3/projects",
+        headers: {'X-TrackerToken' => ENV['TRACKER_TOKEN']})
+      request.on_complete do |response|
+        doc = Nokogiri::XML(response.body)
+        
+        doc.xpath('//projects/project').map do |e|
+          e.xpath('id').text.to_i
+        end        
+      end
+      hydra.queue request
+      hydra.run
+      projects = request.handled_response
+    end
     stories_qs = stories.join(',')
 
     requests = []
