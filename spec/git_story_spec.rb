@@ -12,7 +12,6 @@ describe GitStory do
   let(:states) { %w(accepted rejected finished started).each(&:to_sym) }
 
   def set_up_parameters
-    ENV['TRACKER_PROJECT_ID'] = 'fake project id'
     ENV['TRACKER_TOKEN'] = 'fake tracker token'
   end
 
