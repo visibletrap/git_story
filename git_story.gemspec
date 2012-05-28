@@ -19,4 +19,6 @@ Gem::Specification.new do |gem|
   gem.version       = GitStory::VERSION
 
   gem.add_development_dependency "rspec"
+  gem.add_runtime_dependency 'nokogiri', '~> 1.5'
+  gem.add_runtime_dependency 'typhoeus', '~> 0.3'
 end

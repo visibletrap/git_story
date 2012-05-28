@@ -1,4 +1,4 @@
-require "git_story/version"
+require_relative "git_story/version"
 
 require_relative 'manual_git_commit_lister'
 require_relative 'split_and_match_processor'
@@ -8,6 +8,14 @@ require_relative 'puts_renderer'
 module GitStory
 
   def state(since, until_commit)
+    if ENV["TRACKER_PROJECT_ID"].to_s.size == 0
+      puts "Please, set TRACKER_PROJECT_ID" 
+      abort
+    end
+    if ENV["TRACKER_TOKEN"].to_s.size == 0
+      puts "Please, set TRACKER_TOKEN" 
+      abort
+    end
     commit_state_factory.list(since, until_commit)
   end
 
