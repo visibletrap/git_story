@@ -8,10 +8,6 @@ require_relative 'puts_renderer'
 module GitStory
 
   def state(since, until_commit)
-    if ENV["TRACKER_PROJECT_ID"].to_s.size == 0
-      puts "Please, set TRACKER_PROJECT_ID" 
-      abort
-    end
     if ENV["TRACKER_TOKEN"].to_s.size == 0
       puts "Please, set TRACKER_TOKEN" 
       abort
