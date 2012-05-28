@@ -23,7 +23,7 @@ Then you need to set PivotalTraker's project id and api token to you enviraonmen
 	export TRACKER_PROJECT_ID=your_pivotal_tracker_project_id 
 	export TRACKER_TOKEN=your_pivotal_tracker_api_token
 	
-Or set them permanently by append them to .profile or .bashrc or .bash_profile.
+Or setting permanently by append them to your .profile or .bashrc or .bash_profile.
 
 ## Requirements
 
@@ -44,7 +44,12 @@ This gem required you to put **[#tracker_story_id]** in the begining of commit m
 	0030d2bd62b41092bfb81f9b20b6f00c83a99bf5 #29537523 delivered
 	fcb41b56a5bcf9e66ce9f83d6b4583d7b1ab01bd #30061821 rejected
 	b8500d607ead27c3c277e2ac03f18ccaaeb645b0 #30128209 delivered
+or
+	
+	$ git story origin/production staging_tag
+
 	
 ## Notice
 
  - Current implementation is ignoring **unknown stories** and **non-story id commit**.
+ - If many commits are belonging to a story, only one commit will be displayed.
