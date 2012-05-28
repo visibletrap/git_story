@@ -1,4 +1,4 @@
-require "git_story/version"
+require_relative "git_story/version"
 
 require_relative 'manual_git_commit_lister'
 require_relative 'split_and_match_processor'

@@ -20,7 +20,7 @@ Or install it yourself as:
     
 Then you need to set PivotalTraker's project id and api token to you enviraonment variables:
 
-	export TRACKER_PROJECT_ID=your_pivotal_tracker_project_id 
+	export TRACKER_PROJECT_ID=your_pivotal_tracker_project_id # You can set multiple projects in a comma-separated format
 	export TRACKER_TOKEN=your_pivotal_tracker_api_token
 	
 Or set them permanently by append them to .profile or .bashrc or .bash_profile.
