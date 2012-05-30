@@ -16,12 +16,16 @@ module GitStory
     commit_state_factory.list(since, until_commit)
   end
 
-  def commit_state_factory
+  def commit_state_factory()
     renderer = PutsRenderer.new
-    tracker_connector = TyphoeusTrackerConnector.new
+    tracker_connector = TyphoeusTrackerConnector.new(tracker_project_ids, ENV['TRACKER_TOKEN'])
     state_mapper = TrackerFetchedMapper.new(renderer, tracker_connector)
     commit_processor = SplitAndMatchProcessor.new(state_mapper)
     ManualGitCommitLister.new(commit_processor)
+  end
+
+  def tracker_project_ids
+    (ENV['TRACKER_PROJECT_ID'] || '').split(",")
   end
 
 end

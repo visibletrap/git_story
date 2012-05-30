@@ -7,8 +7,6 @@ describe TrackerFetchedMapper do
 
   subject { TrackerFetchedMapper.new(renderer, tracker_connector) }
 
-  it { should respond_to :fetch }
-
   describe "#execute" do
     it "calls #map and passes result to Renderer" do
       commit_story = mock('commit_story')
@@ -23,18 +21,18 @@ describe TrackerFetchedMapper do
 
   describe '#map' do
     it "maps { story_id => commit } to { commit => { story => story_id, state => state_symbol } }" do
-      subject.should_receive(:fetch).with(['123', '234']).and_return({ '123' => :accepted, '234' => :rejected })
+      tracker_connector.stub(:details_for).with(['123', '234']).and_return({ '123' => ['proj_a', :accepted], '234' => ['proj_b', :rejected] })
       subject.map({ '123' => 'x', '234' => 'y' }).should ==
           {
-              'x' => { 'story' => '123', 'state' => :accepted },
-              'y' => { 'story' => '234', 'state' => :rejected }
+              'x' => { 'story' => '123', 'state' => :accepted, 'project' => 'proj_a' },
+              'y' => { 'story' => '234', 'state' => :rejected, 'project' => 'proj_b' }
           }
     end
 
     it "ignores commit that corresponding story is not returned from #fetch" do
-      subject.should_receive(:fetch).with(['123', '234']).and_return({ '234' => :rejected })
+      tracker_connector.should_receive(:details_for).with(['123', '234']).and_return({ '234' => ['proj_b', :rejected] })
       subject.map({ '123' => 'x', '234' => 'y' }).should ==
-          { 'y' => {'story' => '234', 'state' => :rejected } }
+          { 'y' => {'story' => '234', 'state' => :rejected, 'project' => 'proj_b' } }
     end
   end
 

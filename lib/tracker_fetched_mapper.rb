@@ -6,24 +6,15 @@ class TrackerFetchedMapper
   end
 
   def execute(story_commit)
-    @renderer.render(map(story_commit))
+    map = map(story_commit)
+    @renderer.render(map)
   end
 
   def map(story_commit)
     {}.tap do |h|
-      fetch(story_commit.keys).each do |story, state|
-        h[story_commit[story]] = {'story' => story, 'state' => state}
+      @tracker.details_for(story_commit.keys).each do |story, project_state|
+        h[story_commit[story]] = {'story' => story, 'state' => project_state[1], 'project' => project_state[0]}
       end
     end
   end
-
-  def fetch(stories)
-    if ENV['TRACKER_PROJECT_ID']
-      projects = ENV['TRACKER_PROJECT_ID'].split(",")
-    else
-      projects = @tracker.projects
-    end
-    @tracker.current_state_of(stories, projects)
-  end
-
 end
