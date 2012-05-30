@@ -1,7 +1,8 @@
 class TrackerFetchedMapper
 
-  def initialize(renderer)
+  def initialize(renderer, tracker_connector)
     @renderer = renderer
+    @tracker = tracker_connector
   end
 
   def execute(story_commit)
@@ -17,55 +18,12 @@ class TrackerFetchedMapper
   end
 
   def fetch(stories)
-    require 'rubygems'
-    require 'net/http'
-    require 'uri'
-    require 'nokogiri'
-    require 'typhoeus'
-
-    hydra = Typhoeus::Hydra.new
-
     if ENV['TRACKER_PROJECT_ID']
       projects = ENV['TRACKER_PROJECT_ID'].split(",")
     else
-      request = Typhoeus::Request.new(
-        "http://www.pivotaltracker.com/services/v3/projects",
-        headers: {'X-TrackerToken' => ENV['TRACKER_TOKEN']})
-      request.on_complete do |response|
-        doc = Nokogiri::XML(response.body)
-        
-        doc.xpath('//projects/project').map do |e|
-          e.xpath('id').text.to_i
-        end        
-      end
-      hydra.queue request
-      hydra.run
-      projects = request.handled_response
+      projects = @tracker.projects
     end
-    stories_qs = stories.join(',')
-
-    requests = []
-    projects.each do |project_id|
-      request = Typhoeus::Request.new(
-        "http://www.pivotaltracker.com/services/v3/projects/#{project_id}/stories?filter=id:#{stories_qs}&includedone:true",
-        headers: {'X-TrackerToken' => ENV['TRACKER_TOKEN']})
-
-      request.on_complete do |response|
-        doc = Nokogiri::XML(response.body)
-
-        {}.tap do |h|
-          doc.xpath('//stories/story').map do |e|
-            h[e.xpath('id').text] = e.xpath('current_state').text.to_sym
-          end
-        end        
-      end
-
-      requests << request
-      hydra.queue request
-    end
-    hydra.run
-
-    requests.inject({}){|acc, r| acc.merge(r.handled_response) }
+    @tracker.current_state_of(stories, projects)
   end
 
 end

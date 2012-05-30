@@ -3,8 +3,9 @@ require_relative '../lib/tracker_fetched_mapper'
 describe TrackerFetchedMapper do
 
   let(:renderer) { mock('renderer') }
+  let(:tracker_connector) { mock('tracker_connector') }
 
-  subject { TrackerFetchedMapper.new(renderer) }
+  subject { TrackerFetchedMapper.new(renderer, tracker_connector) }
 
   it { should respond_to :fetch }
 

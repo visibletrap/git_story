@@ -3,6 +3,7 @@ require_relative "git_story/version"
 require_relative 'manual_git_commit_lister'
 require_relative 'split_and_match_processor'
 require_relative 'tracker_fetched_mapper'
+require_relative 'typhoeus_tracker_connector'
 require_relative 'puts_renderer'
 
 module GitStory
@@ -17,7 +18,8 @@ module GitStory
 
   def commit_state_factory
     renderer = PutsRenderer.new
-    state_mapper = TrackerFetchedMapper.new(renderer)
+    tracker_connector = TyphoeusTrackerConnector.new
+    state_mapper = TrackerFetchedMapper.new(renderer, tracker_connector)
     commit_processor = SplitAndMatchProcessor.new(state_mapper)
     ManualGitCommitLister.new(commit_processor)
   end
