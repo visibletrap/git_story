@@ -3,6 +3,7 @@
 This gem is a helper for checking which commits in your git repository belonges to unaccepted PivotalTracker's story so that you can make a decision whether you should deploy those commits or not.
 
 [![Build Status](https://secure.travis-ci.org/visibletrap/git_story.png)](http://travis-ci.org/visibletrap/git_story)
+[![Code Climate](https://codeclimate.com/github/visibletrap/git_story.png)](https://codeclimate.com/github/visibletrap/git_story)
 
 ## Installation
 
